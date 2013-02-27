@@ -5,9 +5,8 @@
         <h2><a href="{{ url('_twitter_default') }}">Últimos twits</a></h2>            
     </header>
     {% for twit in twits %}
-        {% include 'BlogBundle:Frontend/Twitter:item.html.twig' with {'twit': twit} %}
+        {% include 'WebBundle:Twitter:item.html.twig' with {'twit': twit} %}
     {% else %}
         <p>No hay elementos</p>
     {% endfor %}
 {% endblock %}
-
