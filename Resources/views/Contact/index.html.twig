@@ -1,0 +1,41 @@
+{% extends "::frontend.html.twig" %}
+{% block title %} Formulario de contacto {% endblock%}
+{% block content %}    
+<h2>Contacta</h2>
+{% for flashMessage in app.session.flashbag.get('notice') %}
+    <div class="alert alert-success">{{ flashMessage }}</div>
+{% endfor %}
+<p>
+    Preferiblemente ponte en contacto via Twitter
+    <a href="https://twitter.com/desarrolla2">@desarrolla2</a> 
+    o por correo electrónico rellenando el siguiente formulario
+</p>
+<form id="contact" action="{{ path('_contact') }}" method="post" {{ form_enctype(form) }}>
+    {% if form_errors(form) %} 
+        <div class="alert alert-error">{{ form_errors(form) }}</div>
+    {% endif %}                
+        <p>
+            <label for="">Nombre(*)</label>
+            {% if form_errors(form.userName) %} 
+        <div class="alert alert-error">{{ form_errors(form.userName) }}</div>
+            {% endif %}                
+            {{ form_widget(form.userName) }}
+        </p>
+        <p>
+            <label for="">Correo</label>
+            {% if form_errors(form.userEmail) %} 
+        <div class="alert alert-error">{{ form_errors(form.userEmail) }}</div>
+            {% endif %}                
+            {{ form_widget(form.userEmail) }}
+        </p>
+        <p>
+            <label for="">Comentario(*)</label>
+            {% if form_errors(form.content) %} 
+        <div class="alert alert-error">{{ form_errors(form.content) }}</div>
+            {% endif %}                
+            {{ form_widget(form.content) }}
+        </p>   
+    <button class="btn" type="submit">Enviar</button>
+{{ form_rest(form) }}
+</form>
+{% endblock %}
