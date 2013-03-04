@@ -10,11 +10,7 @@
     <a href="https://twitter.com/desarrolla2">@desarrolla2</a> 
     o por correo electrónico rellenando el siguiente formulario
 </p>
-<<<<<<< HEAD
 <form id="contact" action="{{ url('_contact') }}" method="post" {{ form_enctype(form) }}>
-=======
-<form id="contact" action="{{ path('_contact') }}" method="post" {{ form_enctype(form) }}>
->>>>>>> acb59dd2cf05c34df3cbbfd2c55252fcaa1d5157
     {% if form_errors(form) %} 
         <div class="alert alert-error">{{ form_errors(form) }}</div>
     {% endif %}                
