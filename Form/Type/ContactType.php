@@ -30,7 +30,7 @@ class ContactType extends AbstractType {
                     'trim' => true,
                 ))
                 ->add('userEmail', 'text', array(
-                    'required' => false,
+                    'required' => true,
                     'trim' => true,
                 ))
         ;
