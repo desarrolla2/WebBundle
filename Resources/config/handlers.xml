@@ -5,12 +5,17 @@
 
     <parameters>
         <parameter key="web.contact.handler.class">Desarrolla2\Bundle\WebBundle\Handler\Contact</parameter>
+        <parameter key="web.sanitizer.class">Desarrolla2\RSSClient\Sanitizer\Sanitizer</parameter>
     </parameters>
 
     <services>
+        <service id="web.sanitizer" class="%web.sanitizer.class%" public="false">
+            <argument type="string">%kernel.cache_dir%</argument>
+        </service>
         <service id="web.contact.handler" class="%web.contact.handler.class%">
             <argument type="service" id="mailer" />
             <argument type="service" id="templating" />
+            <argument type="service" id="web.sanitizer" />
             <argument type="string" id="web.contact.title" />            
             <argument type="string" id="web.contact.email" />
         </service>

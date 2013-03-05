@@ -42,6 +42,7 @@ class ContactController extends Controller {
                 $this->get('session')
                         ->getFlashBag()
                         ->add('notice', 'Hemos recibido su mensaje');
+                $this->redirect('_contact', 302);
             }
         }
         return array(
