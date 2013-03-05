@@ -33,6 +33,7 @@ class ContactModel {
 
     /**
      * @var string $userEmail
+     * @Assert\NotBlank()
      * @Assert\Email(
      *     message = "'{{ value }}' no es un email válido.",
      *     checkMX = true

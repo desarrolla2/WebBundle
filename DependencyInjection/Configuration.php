@@ -18,11 +18,18 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('web');
-
-        // Here you should define the parameters that are allowed to
-        // configure your bundle. See the documentation linked above for
-        // more information on that topic.
+        $rootNode = $treeBuilder->root('web')
+                ->addDefaultsIfNotSet()
+                ->children()
+                    ->arrayNode('contact')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->scalarNode('title')->defaultValue('Contact Form')->end()
+                            ->scalarNode('name')->defaultValue('Your Name')->end()
+                            ->scalarNode('email')->end()             
+                        ->end()
+                    ->end()                
+                ->end();
 
         return $treeBuilder;
     }

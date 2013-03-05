@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="web.exception.listener.class">Desarrolla2\Bundle\WebBundle\Listener\ExceptionListener</parameter>
+    </parameters>
+
+    <services>
+        <service id="web.exception.listener" class="%web.exception.listener.class%">
+            <argument id="mailer" type="service" />
+            <argument type="string" >%error_sender%</argument>
+            <argument type="string" >%error_email%</argument>
+            <argument type="string" >%error_title%</argument>
+            <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
+        </service>        
+    </services>    
+</container>

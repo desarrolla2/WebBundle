@@ -18,6 +18,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Desarrolla2\Bundle\WebBundle\Form\Type\ContactType;
 use Desarrolla2\Bundle\WebBundle\Form\Model\ContactModel;
+use Desarrolla2\Bundle\WebBundle\Form\Handler\ContactHandler;
 
 /**
  * 
@@ -36,9 +37,8 @@ class ContactController extends Controller {
 
         $form = $this->createForm(new ContactType(), new ContactModel());
         if ($request->getMethod() == 'POST') {
-            $form->bind($request);
-            if ($form->isValid()) {
-                $this->sendEmail($form->getData());
+            $handler = new ContactHandler($request, $form, $this->get('web.contact.handler'));
+            if ($handler->process()) {
                 $this->get('session')
                         ->getFlashBag()
                         ->add('notice', 'Hemos recibido su mensaje');
@@ -47,16 +47,6 @@ class ContactController extends Controller {
         return array(
             'form' => $form->createView(),
         );
-    }
-
-    protected function sendEmail($data) {
-        $message = \Swift_Message::newInstance()
-                ->setSubject('Formulario de contacto')
-                ->setFrom('daniel.gonzalez@freelancemadrid.es')
-                ->setTo('daniel.gonzalez@freelancemadrid.es')
-                ->setReplyTo($data->getUserEmail(), $data->getUserName())
-                ->setBody($data->getContent());
-        $this->get('mailer')->send($message);
     }
 
 }
