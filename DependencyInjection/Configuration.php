@@ -19,7 +19,6 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('web')
-                ->addDefaultsIfNotSet()
                 ->children()
                     ->arrayNode('contact')
                         ->addDefaultsIfNotSet()

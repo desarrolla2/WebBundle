@@ -47,6 +47,7 @@ class ContactController extends Controller {
         }
         return array(
             'form' => $form->createView(),
+            'title' => $this->container->getParameter('web.contact.title'),
         );
     }
 

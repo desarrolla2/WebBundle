@@ -1,9 +1,9 @@
 {% extends "::frontend.html.twig" %}
-{% block title %} Formulario de contacto {% endblock%}
+{% block title %} {{ title }} {% endblock%}
 {% block content %}    
 <article class="post">
     <header>
-        <h2><a href="{{ url('_contact')}}">Formulario de contacto</a></h2>
+        <h2><a href="{{ url('_contact')}}">{{ title }}</a></h2>
     </header>
 {% for flashMessage in app.session.flashbag.get('notice') %}
     <div class="alert alert-success">{{ flashMessage }}</div>

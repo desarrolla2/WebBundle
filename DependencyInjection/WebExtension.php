@@ -26,7 +26,7 @@ class WebExtension extends Extension {
         $container->setParameter('web.contact.title', $config['contact']['title']);
         
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('handlers.xml');
+        $loader->load('contact.xml');
         $loader->load('listeners.xml');
         
     }
