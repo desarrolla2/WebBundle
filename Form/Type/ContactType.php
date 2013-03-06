@@ -10,7 +10,6 @@
  * with this package in the file LICENSE.
  */
 
-
 namespace Desarrolla2\Bundle\WebBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
@@ -32,6 +31,12 @@ class ContactType extends AbstractType {
                 ->add('userEmail', 'text', array(
                     'required' => true,
                     'trim' => true,
+                ))
+                ->add('captcha', 'captcha', array(
+                    'distortion' => false,
+                    'charset' => '1234567890',
+                    'length' => 3,
+                    'invalid_message' => 'Codigo erroneo',
                 ))
         ;
     }

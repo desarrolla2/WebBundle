@@ -63,8 +63,8 @@ class Contact {
     public function __construct(Swift_Mailer $mailer, TwigEngine $templating, $subjet, $to) {
         $this->mailer = $mailer;
         $this->templating = $templating;
-        $this->subject = 'Formulario de Contacto';
-        $this->to = 'daniel.gonzalez@freelancemadrid.es';
+        $this->subject = $subjet;
+        $this->to = $to;
     }
 
     /**
@@ -94,6 +94,7 @@ class Contact {
      */
     protected function renderTemplate(ContactModel $data) {
         return $this->templating->render('WebBundle:Contact:email.html.twig', array(
+                    'subject' => $this->subject,
                     'email' => $data->getUserEmail(),
                     'name' => $data->getUserName(),
                     'content' => $data->getContent(),
