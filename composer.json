@@ -1,20 +1,20 @@
 {
     "name": "desarrolla2/web-bundle",
     "type": "symfony-bundle",
-    "description": "This Bundle provides some general features that y usualy need.",
+    "description": "This Bundle provides some general features that i usualy need.",
     "keywords": ["web"],
     "license": "MIT",
     "minimum-stability": "dev",
-    "authors":
-            [{
-                    "name": "Daniel González",
-                    "homepage": "http://desarrolla2.com/"
-                }],
-    "require":
-            {
-                "ezyang/htmlpurifier": "dev-master",
-                "gregwar/captcha-bundle": "dev-master"
-            },
+    "authors": [{
+            "name": "Daniel González",
+            "homepage": "http://desarrolla2.com/"
+        }],
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/framework-bundle": ">=2.0.0",
+        "gregwar/captcha-bundle": "dev-master",
+        "desarrolla2/rss-client": "dev-master"
+    },
     "autoload": {
         "psr-0": {
             "Desarrolla2\\Bundle\\WebBundle": ""

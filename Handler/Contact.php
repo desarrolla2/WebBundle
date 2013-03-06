@@ -77,7 +77,7 @@ class Contact {
         $message->setFrom($this->to);
         $message->setSubject($this->subject);
         $message->setBody($body);
-        return $this->mailer->send($message, 'text/html');
+        return $this->mailer->send($message);
     }
 
     /**
@@ -85,7 +85,7 @@ class Contact {
      * @return \Swift_Message
      */
     protected function getMessage() {
-        return Swift_Message::newInstance();
+        return Swift_Message::newInstance(null, null, 'text/html');
     }
 
     /**

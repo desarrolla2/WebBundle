@@ -21,7 +21,7 @@ class ContactType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('content', 'textarea', array(
-                    'required' => true,
+                    'required' => false,
                     'trim' => true,
                 ))
                 ->add('userName', 'text', array(
