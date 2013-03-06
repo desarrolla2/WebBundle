@@ -23,7 +23,7 @@ use Desarrolla2\Bundle\WebBundle\Handler\Contact;
  * @author : Daniel González Cerviño <daniel.gonzalez@externos.seap.minhap.es>  
  * @file : ContactHandler.php , UTF-8
  * @date : Mar 5, 2013 , 4:44:27 PM
- */
+ */ 
 class ContactHandler {
 
     /**

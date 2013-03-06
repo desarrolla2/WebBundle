@@ -10,11 +10,11 @@
                     "name": "Daniel González",
                     "homepage": "http://desarrolla2.com/"
                 }],
-    "require": {
-        "desarrolla2/rss-client-bundle": "dev-master",
-        "ezyang/htmlpurifier": "dev-master",
-           "gregwar/captcha-bundle": "dev-master"
-    },
+    "require":
+            {
+                "ezyang/htmlpurifier": "dev-master",
+                "gregwar/captcha-bundle": "dev-master"
+            },
     "autoload": {
         "psr-0": {
             "Desarrolla2\\Bundle\\WebBundle": ""
