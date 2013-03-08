@@ -4,7 +4,7 @@
  * This file is part of the planetubuntu proyect.
  * 
  * Copyright (c)
- * Daniel González Cerviño <daniel.gonzalez@externos.seap.minhap.es>  
+ * Daniel González Cerviño <daniel.gonzalez@freelancemadrid.es>  
  * 
  * This source file is subject to the MIT license that is bundled
  * with this package in the file LICENSE.
@@ -21,7 +21,7 @@ use \Swift_Mailer;
  * 
  * Description of Contact
  *
- * @author : Daniel González Cerviño <daniel.gonzalez@externos.seap.minhap.es>  
+ * @author : Daniel González Cerviño <daniel.gonzalez@freelancemadrid.es>  
  * @file : Contact.php , UTF-8
  * @date : Mar 5, 2013 , 4:53:44 PM
  */
