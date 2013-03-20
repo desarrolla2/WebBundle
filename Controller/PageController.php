@@ -31,4 +31,12 @@ class PageController extends Controller {
         return array();
     }
 
+    /**
+     * @Route("/faq",  name="_faq")
+     * @Template()
+     */
+    public function faqAction() {
+        return array();
+    }
+
 }
