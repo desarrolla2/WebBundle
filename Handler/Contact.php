@@ -76,7 +76,8 @@ class Contact {
         $message->setTo($this->to);
         $message->setFrom($this->to);
         $message->setSubject($this->subject);
-        $message->setBody($body);
+        $message->setBody($body, 'text/html');
+        $message->setReplyTo($data->getUserEmail(),  $data->getUserName());
         return $this->mailer->send($message);
     }
 
