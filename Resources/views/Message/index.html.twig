@@ -1,0 +1,17 @@
+{% extends "::frontend.html.twig" %}
+{% block meta %}<meta name="robots" content="noindex">{% endblock %}
+{% block title %}Mensaje{% endblock %}
+{% block content %}    
+<article>    
+    <header>
+        <h2>Mensaje</h2>
+    </header>
+{% for flashMessage in app.session.flashbag.get('success') %}
+    <div class="alert alert-success">{{ flashMessage }}</div>
+{% endfor %}
+    
+{% for flashMessage in app.session.flashbag.get('error') %}
+    <div class="alert alert-error">{{ flashMessage }}</div>
+{% endfor %}
+</article>
+{% endblock %}

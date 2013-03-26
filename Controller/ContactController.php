@@ -19,6 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Desarrolla2\Bundle\WebBundle\Form\Type\ContactType;
 use Desarrolla2\Bundle\WebBundle\Form\Model\ContactModel;
 use Desarrolla2\Bundle\WebBundle\Form\Handler\ContactHandler;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * 
@@ -41,8 +42,8 @@ class ContactController extends Controller {
             if ($handler->process()) {
                 $this->get('session')
                         ->getFlashBag()
-                        ->add('notice', 'Hemos recibido su mensaje');
-                $this->redirect('_contact', 302);
+                        ->add('success', 'Hemos recibido su mensaje');
+                return new RedirectResponse($this->generateUrl('_message'), 302);
             }
         }
         return array(
