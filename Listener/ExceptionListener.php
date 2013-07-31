@@ -1,10 +1,7 @@
 <?php
 
 /**
- * This file is part of the desarrolla2 proyect.
- * 
- * Copyright (c)
- * Daniel González Cerviño <daniel.gonzalez@ideup.com> 
+ * This file is part of the desarrolla2 project.
  * 
  * This source file is subject to the MIT license that is bundled
  * with this package in the file LICENSE.
@@ -13,16 +10,14 @@
 namespace Desarrolla2\Bundle\WebBundle\Listener;
 
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
-use Symfony\Bundle\FrameworkBundle\HttpKernel;
+use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Swift_Mailer;
 
 /**
  * 
  * Description of ErrorListener
  *
- * @author : Daniel González Cerviño <daniel.gonzalez@ideup.com> 
- * @file : ErrorListener.php , UTF-8
- * @date : Oct 16, 2012 , 5:58:31 PM
+ * @author : Daniel González Cerviño <daniel.gonzalez@freelancemadrid.es>
  */
 class ExceptionListener
 {
@@ -45,7 +40,8 @@ class ExceptionListener
 
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
-        if (HttpKernel::MASTER_REQUEST != $event->getRequestType()) {
+
+        if (HttpKernelInterface::MASTER_REQUEST != $event->getRequestType()) {
             return;
         }
         $exception = $event->getException();
