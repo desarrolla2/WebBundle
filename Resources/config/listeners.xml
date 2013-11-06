@@ -13,6 +13,7 @@
             <argument type="string" >%error_sender%</argument>
             <argument type="string" >%error_email%</argument>
             <argument type="string" >%error_title%</argument>
+            <argument type="string" >%kernel.environment%</argument>
             <tag name="kernel.event_listener" event="kernel.exception" method="onKernelException" />
         </service>        
     </services>    
