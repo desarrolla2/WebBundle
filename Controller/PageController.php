@@ -2,10 +2,10 @@
 
 /**
  * This file is part of the desarrolla2 project.
- * 
+ *
  * Copyright (c)
- * Daniel González Cerviño <daniel.gonzalez@freelancemadrid.es>  
- * 
+ * Daniel González Cerviño <daniel.gonzalez@freelancemadrid.es>
+ *
  * This source file is subject to the MIT license that is bundled
  * with this package in the file LICENSE.
  */
@@ -17,17 +17,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * 
- * Description of PageController
- *
+ * PageController
  */
-class PageController extends Controller {
+class PageController extends Controller
+{
 
     /**
      * @Route("/about-us",  name="_about_us")
      * @Template()
      */
-    public function aboutAction() {
+    public function aboutAction()
+    {
         return array();
     }
 
@@ -35,7 +35,8 @@ class PageController extends Controller {
      * @Route("/faq",  name="_faq")
      * @Template()
      */
-    public function faqAction() {
+    public function faqAction()
+    {
         return array();
     }
 

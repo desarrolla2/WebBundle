@@ -11,6 +11,9 @@ namespace Desarrolla2\Bundle\WebBundle\Listener;
 
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
+use Symfony\Bundle\TwigBundle\TwigEngine;
+use DateTime;
+use Exception;
 use Swift_Mailer;
 
 /**
@@ -21,11 +24,20 @@ use Swift_Mailer;
  */
 class ExceptionListener
 {
+    /**
+     * @var \Exception
+     */
+    protected $exception;
 
     /**
      * @var \Swift_Mailer
      */
     protected $mailer;
+
+    /**
+     * @var DateTime
+     */
+    protected $date;
 
     /**
      * @var string
@@ -38,29 +50,44 @@ class ExceptionListener
     protected $to;
 
     /**
-     * @var string
+     * @var TwigEngine
      */
-    protected $subject;
+    protected $twig;
 
     /**
      * @var string
      */
-    protected $environment;
+    protected $env;
+
+    /**
+     * @var array
+     */
+    protected $ignoredExceptions = array(
+        'Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException',
+        'Symfony\Component\HttpKernel\Exception\NotFoundHttpException'
+    );
+
+// 'dev',
+    protected $ignoredEnvironment = array(
+
+        'test'
+    );
 
     /**
      * @param Swift_Mailer $mailer
+     * @param TwigEngine   $twig
      * @param string       $from
      * @param string       $to
-     * @param string       $subject
      * @param string       $environment
      */
-    public function __construct(Swift_Mailer $mailer, $from, $to, $subject, $environment = 'prod')
+    public function __construct(Swift_Mailer $mailer, TwigEngine $twig, $from, $to, $environment)
     {
+        $this->date = new DateTime();
+        $this->twig = $twig;
         $this->mailer = $mailer;
         $this->from = $from;
         $this->to = $to;
-        $this->subject = $subject;
-        $this->environment = $environment;
+        $this->env = $environment;
     }
 
     /**
@@ -68,33 +95,132 @@ class ExceptionListener
      */
     public function onKernelException(GetResponseForExceptionEvent $event)
     {
-        if ($this->environment == 'dev' || $this->environment == 'test') {
+        $this->exception = $event->getException();
+
+        if (!isset($_SERVER['SERVER_NAME'])) {
             return;
         }
+
         if (HttpKernelInterface::MASTER_REQUEST != $event->getRequestType()) {
             return;
         }
 
-        $exception = $event->getException();
-        if (get_class($exception) != 'Symfony\Component\HttpKernel\Exception\NotFoundHttpException') {
-            $message =
-                'route : http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] . PHP_EOL .
-                'message        : ' . $exception->getMessage() . PHP_EOL .
-                'code           : ' . $exception->getCode() . PHP_EOL .
-                'trace          : ' . $exception->getTraceAsString() . PHP_EOL .
-                'previous       : ' . $exception->getPrevious() . PHP_EOL .
-                'file           : ' . $exception->getFile() . PHP_EOL .
-                'line           : ' . $exception->getLine() . PHP_EOL .
-                'GET            : ' . PHP_EOL . print_r($_GET, true) . PHP_EOL .
-                'POST           : ' . PHP_EOL . print_r($_POST, true) . PHP_EOL .
-                'SERVER         : ' . PHP_EOL . print_r($_SERVER, true) . PHP_EOL;
-
-            $message = \Swift_Message::newInstance()
-                ->setSubject($this->subject . ' ' . $exception->getMessage())
-                ->setFrom($this->from)
-                ->setTo($this->to)
-                ->setBody($message);
-            $this->mailer->send($message);
+        if (in_array($this->getEnv(), $this->getIgnoredEnvironment())) {
+            return;
         }
+
+        if (in_array(get_class($this->getException()), $this->getIgnoredExceptions())) {
+            return;
+        }
+
+        $this->sendExceptionMessage();
     }
+
+    /**
+     * @return string
+     */
+    protected function getBody()
+    {
+        return $this->twig->render(
+            'WebBundle:Mail:exception.html.twig',
+            array(
+                'exception' => $this->getException(),
+                'path' => 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'],
+                'datetime' => $this->getDateTime(),
+                'get' => print_r($_GET, true),
+                'post' => print_r($_POST, true),
+                'server' => print_r($_SERVER, true),
+            )
+        );
+    }
+
+    /**
+     * @return int
+     */
+    protected function sendExceptionMessage()
+    {
+        $message = \Swift_Message::newInstance()
+            ->setSubject($this->getSubject())
+            ->setFrom($this->getFrom())
+            ->setTo($this->getTo())
+            ->setBody($this->getBody(), 'text/html');
+
+        return $this->getMailer()->send($message);
+    }
+
+    /**
+     * @return string
+     */
+    protected function getEnv()
+    {
+        return $this->env;
+    }
+
+    /**
+     * @return \Exception
+     */
+    protected function getException()
+    {
+        return $this->exception;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getFrom()
+    {
+        return $this->from;
+    }
+
+    /**
+     * @return \Swift_Mailer
+     */
+    protected function getMailer()
+    {
+        return $this->mailer;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getSubject()
+    {
+        return
+            '[' . strtolower($_SERVER['SERVER_NAME']) . ']' .
+            '[' . $this->getDateTime() . '] - ' .
+            $this->getException()->getMessage();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getTo()
+    {
+        return $this->to;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getIgnoredEnvironment()
+    {
+        return $this->ignoredEnvironment;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getIgnoredExceptions()
+    {
+        return $this->ignoredExceptions;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getDateTime()
+    {
+        return $this->date->format('Y-m-d H:i:s');
+    }
+
 }

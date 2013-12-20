@@ -2,10 +2,10 @@
 
 /**
  * This file is part of the desarrolla2 project.
- * 
+ *
  * Copyright (c)
- * Daniel González <daniel.gonzalez@freelancemadrid.es> 
- * 
+ * Daniel González <daniel.gonzalez@freelancemadrid.es>
+ *
  * This source file is subject to the MIT license that is bundled
  * with this package in the file LICENSE.
  */
@@ -18,8 +18,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use \Exception;
+
 /**
- * 
+ *
  * Description of ExceptionController
  *
  * @Route("/error")
@@ -34,9 +35,9 @@ class ExceptionController extends Controller
      */
     function throw404Action()
     {
-        throw new NotFoundHttpException();
+        throw new NotFoundHttpException('This is a NotFoundHttpException');
     }
-    
+
     /**
      *
      * @Route("/500")
@@ -44,7 +45,7 @@ class ExceptionController extends Controller
      */
     function throw500Action()
     {
-        throw new Exception();
+        throw new Exception('This is a Exception');
     }
 
 }

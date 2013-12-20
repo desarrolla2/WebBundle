@@ -22,17 +22,19 @@ class TwitterController extends Controller
     public function indexAction(Request $request)
     {
         $twitterClient = $this->container->get('twitter_client');
+
         return array(
             'twits' => $twitterClient->fetch(30)
         );
     }
-    
-        /**
+
+    /**
      * @Template()
      */
     public function lastTwitAction()
     {
         $twitterClient = $this->container->get('twitter_client');
+
         return array(
             'twit' => $twitterClient->fetchOne()
         );

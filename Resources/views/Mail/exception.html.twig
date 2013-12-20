@@ -1,0 +1,42 @@
+<html>
+<head></head>
+<body style="background-color: #505050;">
+<div style="margin: auto; width: 900px; border: 1px solid #333; background-color: #E8E8E8 ; padding: 20px">
+  <h1>A Exception Has Occurred</h1>
+  <table>
+    <tr>
+      <td>path</td>
+      <td>{{ path }}</td>
+    </tr>
+    <tr>
+      <td>message</td>
+      <td>{{ exception.message }}</td>
+    </tr>
+    <tr>
+      <td>code</td>
+      <td>{{ exception.code }}</td>
+    </tr>
+    <tr>
+      <td>date</td>
+      <td>{{ datetime }}</td>
+    </tr>
+    <tr>
+      <td>trace</td>
+      <td><pre>{{ exception.getTraceAsString }}</pre></td>
+    </tr>
+    <tr>
+      <td>get</td>
+      <td><pre>{{ get }}</pre></td>
+    </tr>
+    <tr>
+      <td>post</td>
+      <td><pre>{{ post }}</pre></td>
+    </tr>
+    <tr>
+      <td>server</td>
+      <td><pre>{{ server }}</pre></td>
+    </tr>
+  </table>
+</div>
+</body>
+</html>

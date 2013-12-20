@@ -2,10 +2,10 @@
 
 /**
  * This file is part of the planetubuntu project.
- * 
+ *
  * Copyright (c)
- * Daniel González Cerviño <daniel.gonzalez@freelancemadrid.es>  
- * 
+ * Daniel González Cerviño <daniel.gonzalez@freelancemadrid.es>
+ *
  * This source file is subject to the MIT license that is bundled
  * with this package in the file LICENSE.
  */
@@ -18,11 +18,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 /**
- * 
- * Description of MessageController
- *
+ * MessageController
  */
-class MessageController extends Controller {
+class MessageController extends Controller
+{
 
     /**
      *
@@ -30,9 +29,9 @@ class MessageController extends Controller {
      * @Route("/message", name="_message")
      * @Template()
      */
-    public function indexAction(Request $request) {
-        return array(
-        );
+    public function indexAction(Request $request)
+    {
+        return array();
     }
 
 }
