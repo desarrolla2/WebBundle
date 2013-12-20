@@ -186,7 +186,7 @@ class ExceptionListener
     protected function getSubject()
     {
         return
-            '[' . strtolower($_SERVER['SERVER_NAME']) . ']' .
+            '[' . strtolower($_SERVER['SERVER_NAME']) . '] ' .
             '[' . $this->getDateTime() . '] - ' .
             $this->getException()->getMessage();
     }
