@@ -67,10 +67,12 @@ class ExceptionListener
         'Symfony\Component\HttpKernel\Exception\NotFoundHttpException'
     );
 
-// 'dev',
+    /**
+     * @var array
+     */
     protected $ignoredEnvironment = array(
 
-        'test'
+        'test', 'dev'
     );
 
     /**
