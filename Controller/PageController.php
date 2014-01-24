@@ -40,4 +40,14 @@ class PageController extends Controller
         return array();
     }
 
+
+    /**
+     * @Route("/cookies-policy",  name="_cookies")
+     * @Template()
+     */
+    public function cookiesAction()
+    {
+        return array();
+    }
+
 }
