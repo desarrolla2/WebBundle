@@ -16,7 +16,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class ContactModel
 {
-
     /**
      * @var string $content
      * @Assert\NotBlank()
@@ -40,39 +39,6 @@ class ContactModel
      *     checkMX = true
      * )
      */
+
     public $userEmail;
-
-    public function __construct()
-    {
-    }
-
-    public function getContent()
-    {
-        return $this->content;
-    }
-
-    public function setContent($content)
-    {
-        $this->content = $content;
-    }
-
-    public function getUserName()
-    {
-        return $this->userName;
-    }
-
-    public function setUserName($userName)
-    {
-        $this->userName = $userName;
-    }
-
-    public function getUserEmail()
-    {
-        return $this->userEmail;
-    }
-
-    public function setUserEmail($userEmail)
-    {
-        $this->userEmail = $userEmail;
-    }
 }

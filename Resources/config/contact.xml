@@ -9,10 +9,10 @@
 
     <services>
         <service id="web.contact.handler" class="%web.contact.handler.class%">
-            <argument type="service" id="mailer" />
-            <argument type="service" id="templating" />
-            <argument type="string" >%web.contact.title%</argument>
-            <argument type="string" >%web.contact.email%</argument>
+            <argument type="service" id="mailer"/>
+            <argument type="service" id="templating"/>
+            <argument type="string">%web.contact.title%</argument>
+            <argument type="string">%web.contact.email%</argument>
         </service>
-    </services>    
+    </services>
 </container>

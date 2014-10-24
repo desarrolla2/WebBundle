@@ -26,7 +26,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class ContactController extends Controller
 {
-
     /**
      *
      * @Route("/contact", name="_contact")
@@ -40,16 +39,22 @@ class ContactController extends Controller
             if ($handler->process()) {
                 $this->get('session')
                     ->getFlashBag()
-                    ->add('success', 'Hemos recibido su mensaje');
+                    ->add(
+                        'success',
+                        $this->get('translator')->trans(
+                            'Hemos recibido su mensaje',
+                            [],
+                            'WebBundle'
+                        )
+                    );
 
                 return new RedirectResponse($this->generateUrl('_message'), 302);
             }
         }
 
-        return array(
+        return [
             'form' => $form->createView(),
             'title' => $this->container->getParameter('web.contact.title'),
-        );
+        ];
     }
-
 }

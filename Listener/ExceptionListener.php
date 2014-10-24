@@ -17,10 +17,7 @@ use Exception;
 use Swift_Mailer;
 
 /**
- *
- * Description of ErrorListener
- *
- * @author : Daniel González Cerviño <daniel.gonzalez@freelancemadrid.es>
+ * ErrorListener
  */
 class ExceptionListener
 {
@@ -62,25 +59,25 @@ class ExceptionListener
     /**
      * @var array
      */
-    protected $ignoredExceptions = array(
+    protected $ignoredExceptions = [
         'Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException',
         'Symfony\Component\HttpKernel\Exception\NotFoundHttpException'
-    );
+    ];
 
     /**
      * @var array
      */
-    protected $ignoredEnvironment = array(
-
-        'test', 'dev'
-    );
+    protected $ignoredEnvironment = [
+        'test',
+        'dev'
+    ];
 
     /**
      * @param Swift_Mailer $mailer
-     * @param TwigEngine   $twig
-     * @param string       $from
-     * @param string       $to
-     * @param string       $environment
+     * @param TwigEngine $twig
+     * @param string $from
+     * @param string $to
+     * @param string $environment
      */
     public function __construct(Swift_Mailer $mailer, TwigEngine $twig, $from, $to, $environment)
     {
@@ -125,14 +122,14 @@ class ExceptionListener
     {
         return $this->twig->render(
             'WebBundle:Mail:exception.html.twig',
-            array(
+            [
                 'exception' => $this->getException(),
                 'path' => 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'],
                 'datetime' => $this->getDateTime(),
                 'get' => print_r($_GET, true),
                 'post' => print_r($_POST, true),
                 'server' => print_r($_SERVER, true),
-            )
+            ]
         );
     }
 
@@ -224,5 +221,4 @@ class ExceptionListener
     {
         return $this->date->format('Y-m-d H:i:s');
     }
-
 }
